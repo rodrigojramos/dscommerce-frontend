@@ -4,27 +4,21 @@ import { useState } from "react";
 import { OrderDTO, OrderItemDTO } from "../../../models/order";
 import { Link } from "react-router-dom";
 
-const item1: OrderItemDTO = new OrderItemDTO(
-  4,
-  1,
-  "PC Gamer",
-  1200,
-  "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/4-big.jpg"
-);
-
-const item2: OrderItemDTO = new OrderItemDTO(
-  5,
-  2,
-  "Rails for Dummies",
-  100.99,
-  "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/5-big.jpg"
-);
-
 export default function Cart() {
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
 
   function handleClearClick() {
     cartService.clearCart();
+    setCart(cartService.getCart());
+  }
+
+  function handleIncreaseItem(productId: number) {
+    cartService.increaseItem(productId);
+    setCart(cartService.getCart());
+  }
+
+  function handleDecreaseItem(productId: number) {
+    cartService.decreaseItem(productId);
     setCart(cartService.getCart());
   }
 
@@ -47,9 +41,9 @@ export default function Cart() {
                   <div className="dsc-cart-item-description">
                     <h3>{item.name}</h3>
                     <div className="dsc-cart-item-quantity-container">
-                      <div className="dsc-cart-item-quantity-btn">-</div>
+                      <div onClick={() => handleDecreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">-</div>
                       <p>{item.quantity}</p>
-                      <div className="dsc-cart-item-quantity-btn">+</div>
+                      <div onClick={() => handleIncreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">+</div>
                     </div>
                   </div>
                 </div>
