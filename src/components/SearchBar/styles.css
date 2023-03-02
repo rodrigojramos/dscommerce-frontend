@@ -28,6 +28,7 @@
   .dsc-search-bar button {
     width: 40px;
     color: var(--dsc-color-font-primary);
+    background-color: var(--dsc-color-card-bg);
   }
   
   .dsc-search-bar button[type="submit"] {
