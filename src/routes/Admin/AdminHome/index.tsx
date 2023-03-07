@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { UserDTO } from '../../../models/user';
 import * as  userService from '../../../services/user-service';
 
-
 export default function AdminHome() {
 
   const [user, setUser] = useState<UserDTO>();
@@ -13,9 +12,6 @@ export default function AdminHome() {
       .then(response => {
         setUser(response.data);
         console.log(response.data);
-      })
-      .catch(error => {
-        console.log("Error", error);
       })
   }, [])
 
